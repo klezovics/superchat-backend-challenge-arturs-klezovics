@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    password:
+    url: jdbc:h2:mem:testdb
+    username: sa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+twilio:
+  account_sid: AC7b7578901d56fc3aac7223d4bd6d3f18
+  auth_token: e63f7cf6f84481787d888320a33cc0b7
+  phone_number: '+17209034257'
