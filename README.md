@@ -1,23 +1,14 @@
-== TO DO == 
-
-- Email webhook 
-- See opportunity for refactoring
-- Test coverage for the system core
-- Controllers + tests for them
-- Manual testing 
-- README
-
 # Introduction 
 
-===
-!!! NOTE !!!
+
+### !!! NOTE !!!
 
 This application contains hardcoded API keys and login/password details for ease of testing. 
 This is not something to be done in a production environment in any circumstances.
 It is done in this app for ease of testing by the reviewers of the challenge and special 
 "throwaway" accounts are used. 
 
-===
+### End of note
 
 This application will allow users to send & receive messages via Sms and Email.
 It comes with a considerable test suite, which you can find in the "test" folder.

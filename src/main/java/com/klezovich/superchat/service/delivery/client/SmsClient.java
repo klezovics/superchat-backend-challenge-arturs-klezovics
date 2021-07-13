@@ -48,6 +48,6 @@ public class SmsClient implements DeliveryClient {
 
     @Override
     public void deliverMessage(com.klezovich.superchat.domain.message.Message m) {
-
+        sendSms(m.getContact().getPhoneNumber(),m.getText());
     }
 }

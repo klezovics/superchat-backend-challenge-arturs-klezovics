@@ -19,7 +19,7 @@ import java.util.Properties;
 public class EmailClient implements DeliveryClient {
 
     @SneakyThrows
-    public void sendEmail(String emailTo, String subject, String text) {
+    public void sendEmail(String emailTo, String emailFrom, String subject, String text) {
 
         Properties prop = new Properties();
         prop.put("mail.smtp.auth", true);
@@ -34,7 +34,7 @@ public class EmailClient implements DeliveryClient {
         });
 
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("from@gmail.com"));
+        message.setFrom(new InternetAddress(emailFrom));
         message.setRecipients(
                 Message.RecipientType.TO, InternetAddress.parse(emailTo));
         message.setSubject(subject);
@@ -57,6 +57,10 @@ public class EmailClient implements DeliveryClient {
 
     @Override
     public void deliverMessage(com.klezovich.superchat.domain.message.Message m) {
-
+        sendEmail(m.getContact().getEmail(),
+                m.getUser().getUserDetails().getEmail(),
+                m.getText().substring(0,10),
+                m.getText()
+        );
     }
 }
