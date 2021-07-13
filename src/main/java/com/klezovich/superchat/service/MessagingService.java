@@ -8,6 +8,7 @@ import com.klezovich.superchat.domain.token.ReplaceTokensRequest;
 import com.klezovich.superchat.repository.ContactRepository;
 import com.klezovich.superchat.repository.MessageRepository;
 import com.klezovich.superchat.repository.UserRepository;
+import com.klezovich.superchat.service.delivery.MessageDeliveryService;
 import com.klezovich.superchat.service.tokens.TokenReplacementService;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +24,18 @@ public class MessagingService {
     private final UserRepository userRepository;
     private final MessageRepository messageRepository;
     private final TokenReplacementService tokenReplacementService;
+    private final MessageDeliveryService deliveryService;
 
     @Autowired
     public MessagingService(
             ContactRepository contactRepository,
             UserRepository userRepository,
-            MessageRepository messageRepository, TokenReplacementService tokenReplacementService) {
+            MessageRepository messageRepository, TokenReplacementService tokenReplacementService, MessageDeliveryService deliveryService) {
         this.contactRepository = contactRepository;
         this.userRepository = userRepository;
         this.messageRepository = messageRepository;
         this.tokenReplacementService = tokenReplacementService;
+        this.deliveryService = deliveryService;
     }
 
     @NonNull
@@ -91,6 +94,7 @@ public class MessagingService {
                 .build();
 
         messageRepository.save(msg);
+        deliveryService.deliverMessage(msg);
     }
 
     public void receiveEmailFromContactByUser(String userEmail, String contactEmail, String emailText) {

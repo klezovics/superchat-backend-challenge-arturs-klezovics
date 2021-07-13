@@ -20,6 +20,7 @@ It is done in this app for ease of testing by the reviewers of the challenge and
 ===
 
 This application will allow users to send & receive messages via Sms and Email.
+It comes with a considerable test suite, which you can find in the "test" folder.
 
 Sending and receipt of SMS is done via integration with Twilio. (https://www.twilio.com/)
 SMS messages are sent using Twilio SDK. 
@@ -37,6 +38,15 @@ To test this functionality you can set up Gmail account and configure a webhook 
 automate.io (https://automate.io/). The webhook expects the incoming message to follow a 
 specific JSON schema.
 
+# How to run and test the application
+
+## Start
+
+Run the app with the following command mvn spring-boot:run -Dspring-boot.run.profiles=production
+This will run the app on localhost:8080/
+
+The app comes with a preconfigured user "spring" password "secret".
+You can use http basic auth with these credentials to interact with the API.
 
 # Architecture
 The app has a standard 3 layered architecture.
@@ -46,6 +56,14 @@ The key service is "MessagingService" it is used to send messages from users to 
 It also allows users to receive messages from their contacts.
 
 Controllers act as thin wrappers for the services.
+
+The key expected axis of change would be the following 
+- Number of communication channels
+- Different tokens/placeholders which needs to be replaced
+
+In this regard the system follows the open/closed principle to make adding 
+new tokens/communication channels easy. To see this look at the code of the 
+"TokenReplacementService" and "MessageDeliveryService". 
 
 Key flows through the application are covered by unit/integration tests.
 

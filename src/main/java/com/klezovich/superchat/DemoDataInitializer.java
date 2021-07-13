@@ -1,7 +1,9 @@
 package com.klezovich.superchat;
 
+import com.klezovich.superchat.domain.Contact;
 import com.klezovich.superchat.domain.UserDetails;
 import com.klezovich.superchat.repository.UserRepository;
+import com.klezovich.superchat.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -12,6 +14,9 @@ public class DemoDataInitializer implements ApplicationRunner {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private ContactService contactService;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {

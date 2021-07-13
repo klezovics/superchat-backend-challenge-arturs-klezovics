@@ -25,7 +25,8 @@ public class MessageDeliveryService {
         this.repository = repository;
     }
 
-    @Scheduled(fixedDelay = 1000)
+    //Runs every five minutes to retry and deliver undelivered messages
+    @Scheduled(fixedDelay = 300000)
     public void deliverMessages() {
         var undeliveredMessages = repository.findByStatus(MessageStatus.UNSENT);
         for(var message : undeliveredMessages) {
